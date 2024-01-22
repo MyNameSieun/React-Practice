@@ -15,120 +15,131 @@ function App() {
   const [result, setResult] = useState(""); // Result array
   const [query, setQuery] = useState(""); // input창 state
 
-  /** article_1 함수 */
+  /*** article_1 함수 ***/
+
+  // 1. forEach: Array의 각 아이템을 출력
   const handleForEach = () => {
     let tempResult = "";
     array.forEach(function (fruit) {
-      tempResult += `${fruit}, `; // tempResult에 frult을 붙힘
+      tempResult += `${fruit}`;
     });
     setResult(tempResult);
-    setResult(tempResult.slice(0, -2)); // 뒤에 두 문자 제거
   };
 
+  // 2.filter: Array의 요소 중에서 입력한 값과 일치하는 요소들만 출력
   const handleFilter = () => {
-    const filteredList = array.filter(function (fruit) {
-      // 얘를 필터링을 할지 말지를 결정한다.
+    const newArray = array.filter(function (fruit) {
       if (fruit.includes(query)) {
         return true;
-      } else {
-        return false; // 여기서 결정한다.
-      }
+      } else return false;
     });
-    setResult(filteredList.join(", "));
+    setResult(newArray.join(", "));
   };
 
+  // 3. map: Array의 각 요소를 대문자로 변환하여 출력
   const handleMap = () => {
-    // array를 대문자로 변환하여 출력
-    const mappedList = array.map(function (fruit) {
+    const newArray = array.map(function (fruit) {
       return fruit.toUpperCase();
     });
-    setResult(mappedList.join(", "));
+    setResult(newArray.join(", "));
   };
 
+  // 4. reduce: 각 아이템을 쉼표로 구분하여 출력 (축적되는 형태)
   const handleReduce = () => {
-    const reducedListText = array.reduce(function (acc, cur) {
+    const reduceList = array.reduce(function (acc, cur) {
       return `${acc}, ${cur}`;
     });
-    setResult(reducedListText);
+    setResult(reduceList);
   };
 
+  // 5. push: input 태그에 입력한 값을 배열 끝에 추가하여 출력
   const handlePush = () => {
-    // input 태그에 입력한 값이 끝에 달라붙도록
     if (!query) {
       alert("값이 없습니다!");
       return false;
     }
-    const newArr = [...array, query];
-    setArray(newArr); // 참조하는 원본 array의 값도 반영해줘야함
-    setResult(newArr.join(", "));
+    const newArray = [...array, query];
+    // newArray.push(query);
+    setArray(newArray);
+    setResult(newArray.join(", "));
   };
 
+  // 6. pop: 배열에서 마지막 아이템을 제거하고 결과를 출력
   const handlePop = () => {
-    const newArr = [...array];
-    newArr.pop();
-    setArray(newArr);
-    setResult(newArr.join(", "));
+    const newArray = [...array];
+    newArray.pop();
+    setArray(newArray);
+    setResult(newArray.join(", "));
   };
 
+  // 7. slice: 원본 배열의 뒤에서 두 개의 아이템을 제외한 나머지를 출력
   const handleSlice = () => {
-    // 원본배열의 뒤 2개 아이템을 제거하여 출력
     const newArr = array.slice(0, -2);
-    setResult(newArr);
     setResult(newArr.join(", "));
   };
 
-  /** article_2 함수 */
+  /*** article_2 함수 ***/
+
+  // 8. splice: 원본 배열의 2번째 위치부터 2개의 아이템을 제거하고 "pineapple🍍", "grape🍇"을 추가하여 결과를 출력
   const handleSplice = () => {
-    // 원본 배열의 2번째 위치부터 2개의 아이템을 제거하고 "pineapple🍍", "grape🍇"을 추가하여 결과를 출력
-    const newArr = [...array];
-    newArr.splice(2, 2, "pineapple🍍", "grape🍇");
-    setResult(newArr);
-    setResult(newArr.join(", "));
+    const newArray = [...array];
+    newArray.splice(2, 2, "pineapple🍍", "grape🍇");
+    setResult(newArray.join(", "));
   };
 
+  // 9. indexOf: input에 입력한 값과 일치하는 값이 있는 경우 해당 index를 출력, 없는 경우, -1을 출력
   const handleIndexOf = () => {
-    // 1. input에 입력한 값과 일치하는 값이 있는 경우 `해당 index`를 출력
-    // 2. 없는 경우, `-1`을 출력
-    const index = array.indexOf(query);
-    setResult(index !== -1 ? index : -1);
+    const newArray = array.indexOf(query);
+    setResult(newArray);
   };
 
+  // 10. includes: 원본배열이 input에 입력한 값과 일치하는 정확한 과일명을 가지고있는 경우 true 출력, 그 외의 경우 false 출력
   const handleIncludes = () => {
-    // 원본배열이 input에 입력한 값과 일치하는 정확한 과일명을 가지고있는 경우 true 출력, 그 외의 경우 false 출력
-    const includes = array.includes(query);
-    setResult(includes);
+    const newArray = array.includes(query);
+    setResult(newArray.toString());
   };
 
+  // 11. find: 원본배열이 input에 입력한 값을 포함하는 과일명을 가지고있는 경우 과일명을 출력, 그 외의 경우 "Not Found"를 출력?????????????????????????????????????????????왜?
   const handleFind = () => {
-    // 원본배열이 input에 입력한 값을 포함하는 과일명을 가지고있는 경우 과일명을 출력, 그 외의 경우 “Not Found”를 출력
-    const foundItem = array.find((fruit) => fruit.includes(query));
-    setResult(foundItem || "Not Found");
+    const newArray = array.find(function (fruit) {
+      return fruit.includes(query);
+    });
+    if (newArray) {
+      setResult(newArray);
+    } else {
+      setResult("Not Found");
+    }
   };
 
+  // 12. some: 원본배열이 input에 입력한 값을 포함하는 과일명을 가지고있는 경우 true을 출력, 그 외의 경우 false 를 출력?????????????????????????????????????????????
   const handleSome = () => {
-    // 원본배열이 input에 입력한 값을 포함하는 과일명을 가지고있는 경우 true을 출력, 그 외의 경우 false 를 출력
-    const hasItem = array.some((fruit) => fruit.includes(query));
-    setResult(hasItem);
+    const newArray = array.some(function (fruit) {
+      return fruit.includes(query);
+    });
+    setResult(newArray.toString());
   };
 
+  // 13. every: 모든 과일명이 5글자를 초과하는 경우 true를 출력, 그 외의 경우 false를 출력
   const handleEvery = () => {
-    // 모든 과일명이 5글자를 초과하는 경우 true를 출력, 그 외의 경우 false를 출력
-    const allOverFive = array.every((fruit) => fruit.length > 5);
-    setResult(allOverFive);
+    const newArray = array.every(function (fruit) {
+      return fruit.length > 5;
+    });
+    setResult(newArray.toString());
   };
 
+  // 14. sort: 알파벳 내림차순 정렬 후 리스트 명을 ", "로 구분하여 출력??????????????????????????????????????????????????????????????? ㅠㅠ
   const handleSort = () => {
-    // 알파벳 내림차순 정렬 후 리스트 명을 “, “로 구분하여 출력
-    const sortedArray = [...array].sort((a, b) => b.localeCompare(a));
-    setArray(sortedArray);
-    setResult(sortedArray.join(", "));
+    const newArray = [...array];
+    newArray.array.sort(function (a, b) {
+      return a + b;
+    });
+    setResult(newArray.join(", "));
   };
 
+  // 15. join: 배열의 모든 요소를 쉼표(", ")로 구분하고 결합된 문자열을 출력
   const handleJoin = () => {
-    const joinedString = array.join(", ");
-    // join() 메서드만 사용할 경우 배열의 원소들의 쉼표로 구분
-    // 원소들의 구분을 다른 문자로 하려면 () 안에 원하는 문자를 넣으면 됨 ex array.join("-")
-    setResult(joinedString);
+    const newArray = array.join(", ");
+    setResult(newArray);
   };
 
   return (
@@ -158,14 +169,14 @@ function App() {
           <button onClick={handleSlice}>slice</button>
         </article>
         <article>
-          <button onClick={handleSplice}>Splice</button>
-          <button onClick={handleIndexOf}>IndexOf</button>
-          <button onClick={handleIncludes}>Includes</button>
-          <button onClick={handleFind}>Find</button>
-          <button onClick={handleSome}>Some</button>
-          <button onClick={handleEvery}>Every</button>
-          <button onClick={handleSort}>Sort</button>
-          <button onClick={handleJoin}>Join</button>
+          <button onClick={handleSplice}>splice</button>
+          <button onClick={handleIndexOf}>indexOf</button>
+          <button onClick={handleIncludes}>includes</button>
+          <button onClick={handleFind}>find</button>
+          <button onClick={handleSome}>some</button>
+          <button onClick={handleEvery}>every</button>
+          <button onClick={handleSort}>sort</button>
+          <button onClick={handleJoin}>join</button>
         </article>
       </section>
       <div className="input-layout">
