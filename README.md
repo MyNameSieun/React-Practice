@@ -4,7 +4,7 @@
 
 🔗 [arrayAPI 공부 내용 정리 블로그 링크](https://mynamesieun.github.io/javascript/%EB%B0%B0%EC%97%B4%EA%B3%BC-%EB%A9%94%EC%84%9C%EB%93%9C/)
 
-![arrayAPI](image.png)
+![arrayAPI](arrayAPI/public/arrayAPI.png)
 
 <br>
 
