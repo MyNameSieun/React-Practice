@@ -3,12 +3,12 @@ import "./App.css";
 
 function App() {
   const initialArray = [
-    "사과🍎",
-    "바나나🍌",
-    "체리🍒",
-    "멜론🍈",
-    "레몬🍋",
-    "귤🍊",
+    "apple🍎",
+    "banana🍌",
+    "cherry🍒",
+    "melon🍈",
+    "lemon🍋",
+    "tangerine🍊",
   ];
 
   const [array, setArray] = useState(initialArray); // origin array
@@ -79,9 +79,9 @@ function App() {
 
   /** article_2 함수 */
   const handleSplice = () => {
-    // 원본 배열의 2번째 위치부터 2개의 아이템을 제거하고 "파인애플🍍", "포도🍇"을 추가하여 결과를 출력
+    // 원본 배열의 2번째 위치부터 2개의 아이템을 제거하고 "pineapple🍍", "grape🍇"을 추가하여 결과를 출력
     const newArr = [...array];
-    newArr.splice(2, 2, "파인애플🍍", "포도🍇");
+    newArr.splice(2, 2, "pineapple🍍", "grape🍇");
     setResult(newArr);
     setResult(newArr.join(", "));
   };
@@ -125,7 +125,7 @@ function App() {
   };
 
   const handleJoin = () => {
-    const joinedString = array.join();
+    const joinedString = array.join(", ");
     // join() 메서드만 사용할 경우 배열의 원소들의 쉼표로 구분
     // 원소들의 구분을 다른 문자로 하려면 () 안에 원하는 문자를 넣으면 됨 ex array.join("-")
     setResult(joinedString);
