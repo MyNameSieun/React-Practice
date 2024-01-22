@@ -2,9 +2,9 @@
 
 ## 1. arrayAPI
 
-🔗 [arrayAPI를 공부한 블로그 링크](https://mynamesieun.github.io/javascript/%EB%B0%B0%EC%97%B4%EA%B3%BC-%EB%A9%94%EC%84%9C%EB%93%9C/)
+🔗 [arrayAPI 공부 내용 정리 블로그 링크](https://mynamesieun.github.io/javascript/%EB%B0%B0%EC%97%B4%EA%B3%BC-%EB%A9%94%EC%84%9C%EB%93%9C/)
 
-![![](2024-01-22-17-48-10.png)](arrayAPI/public/arrayAPI.png)
+![arrayAPI](image.png)
 
 <br>
 
@@ -17,7 +17,7 @@
 5. `push`: input 태그에 입력한 값을 배열 끝에 추가하여 출력
 6. `pop`: 배열에서 마지막 아이템을 제거하고 결과를 출력
 7. `slice`: 원본 배열의 뒤에서 두 개의 아이템을 제외한 나머지를 출력
-8. `splice`: 원본 배열의 2번째 위치부터 2개의 아이템을 제거하고 "파인애플🍍", "포도🍇"을 추가하여 결과를 출력
+8. `splice`: 원본 배열의 2번째 위치부터 2개의 아이템을 제거하고 "pineapple🍍", "grape🍇"을 추가하여 결과를 출력
 9. `indexOf`: input에 입력한 값과 일치하는 값이 있는 경우 해당 index를 출력, 없는 경우, -1을 출력
 10. `includes`: 원본배열이 input에 입력한 값과 일치하는 정확한 과일명을 가지고있는 경우 true 출력, 그 외의 경우 false 출력
 11. `find`: 원본배열이 input에 입력한 값을 포함하는 과일명을 가지고있는 경우 과일명을 출력, 그 외의 경우 “Not Found”를 출력
