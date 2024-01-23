@@ -2,7 +2,7 @@
 
 ## 1. arrayAPI
 
-🔗 [arrayAPI 공부 내용 정리 블로그 링크](https://mynamesieun.github.io/javascript/%EB%B0%B0%EC%97%B4%EA%B3%BC-%EB%A9%94%EC%84%9C%EB%93%9C/)
+[🔗 arrayAPI 공부 내용 정리 블로그 링크](https://mynamesieun.github.io/javascript/%EB%B0%B0%EC%97%B4%EA%B3%BC-%EB%A9%94%EC%84%9C%EB%93%9C/)
 
 ![arrayAPI](arrayAPI/public/arrayAPI.png)
 
@@ -71,6 +71,54 @@
      setResult(newArray.join(", "));
    };
    ```
+
+<br>
+
+3. 공백 조건을 줘야한다.
+
+   - 공백 조건을 주지 않으면 입력 값이 없음에도 불구하고 무조건 첫 번째 배열의 요소가 출력되는 오류가 있었다.
+   - find 및 some 메서드는 입력한 값을 기반으로 배열에서 원하는 값을 찾거나 조건을 확인하는데 공백 조건을 주지 않은 경우, 입력값이 없는 상태에서 함수를 호출하면 query 변수에는 빈 문자열("")이 할당되게 된다.
+   - find 및 some 메서드는 입력값이 빈 문자열인 경우, 빈 문자열을 포함한 모든 요소를 찾는 조건을 만족하게 되므로 공백 조건을 줘야한다.<br><br>
+
+   ```js
+   const handleSome = () => {
+     // query 공백 조건 추가
+     if (!query) {
+       alert("값이 없습니다!");
+       return false;
+     }
+     const newArray = array.some(function (fruit) {
+       return fruit.includes(query);
+     });
+     setResult(newArray.toString());
+   };
+   ```
+
+<br>
+
+4.  문자열을 비교할 때는 `localeCompare()` 메서드를 사용해서 비교해야한다.
+
+    - 문자열을 비교할 때는 각 문자의 유니코드 값을 비교하여 정렬하는 방식을 사용하기 때문이다.
+    - localeCompare 메소드는 유니코드 값을 기반으로 문자열을 비교하여 정렬할 수 있도록 도와준다.
+    - [🔗 sort 공부 내용 정리 블로그 링크](<https://mynamesieun.github.io/javascript/sort()%EB%A1%9C-%EB%B0%B0%EC%97%B4-%EC%A0%95%EB%A0%AC%ED%95%98%EA%B8%B0/>)<br><br>
+
+    | 정렬 방법 |               숫자               |                    문자열                     |
+    | :-------: | :------------------------------: | :-------------------------------------------: |
+    | 오름차순  | `numbers.sort((a, b) => a - b);` | `strings.sort((a, b) => a.localeCompare(b));` |
+    | 내림차순  | `numbers.sort((a, b) => b - a);` | `strings.sort((a, b) => b.localeCompare(a));` |
+
+    ```js
+    const handleSort = () => {
+      const newArray = [...array];
+      console.log(newArray);
+      newArray.sort(function (a, b) {
+        //return b - a; 숫자 비교시
+        return b.localeCompare(a); // 문자열 비교시
+      });
+      console.log(newArray);
+      setResult(newArray.join(", "));
+    };
+    ```
 
 <br>
 
