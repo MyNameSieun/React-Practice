@@ -1,9 +1,14 @@
 main {
   width: 100%;
   padding: 40px;
+  padding-left: 300px;
 }
 .todo-item {
   border: 1px solid black;
   width: 400px;
   padding: 30px;
+}
+button {
+  margin-top: 2rem;
+  margin-right: 3px;
 }

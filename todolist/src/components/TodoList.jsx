@@ -19,8 +19,8 @@ function TodoList({ todos, setTodos, listIsDone }) {
           .map(function (todo) {
             return (
               <div className="todo-item" key={todo.id}>
-                <div>{todo.title}</div>
-                <div>{todo.content}</div>
+                <h2>제목: {todo.title}</h2>
+                <div>내용: {todo.content}</div>
                 <button
                   onClick={function () {
                     const newTodos = todos.map(function (item) {
