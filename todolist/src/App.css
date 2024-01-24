@@ -1,0 +1,9 @@
+main {
+  width: 100%;
+  padding: 40px;
+}
+.todo-item {
+  border: 1px solid black;
+  width: 400px;
+  padding: 30px;
+}

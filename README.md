@@ -2,7 +2,7 @@
 
 ## 1. arrayAPI
 
-[🔗 arrayAPI 공부 내용 정리 블로그 링크](https://mynamesieun.github.io/javascript/%EB%B0%B0%EC%97%B4%EA%B3%BC-%EB%A9%94%EC%84%9C%EB%93%9C/)
+🔗 [arrayAPI 공부 내용 정리 블로그 링크](https://mynamesieun.github.io/javascript/%EB%B0%B0%EC%97%B4%EA%B3%BC-%EB%A9%94%EC%84%9C%EB%93%9C/)
 
 ![arrayAPI](arrayAPI/public/arrayAPI.png)
 
@@ -35,6 +35,7 @@
    - 즉, 새 배열을 반환하는 메서드 또는 결과 값을 반환하는 메서드의 경우 `const newArr = [...array];`와 같이 원래 배열을 복사하여 새로운 배열을 만들 필요가 없는 것이다!
    - 이처럼 새로운 배열을 반환하는 메서드는 map, filter, slice, concat 등이 있다.
    - 원본 배열을 수정하는 메서드(push, pop, shift, splice 등)의 경우 원래 배열을 복사해야한다.
+   - 또한 state가 array, object인 경우도 원래 배열을 복사해야한다.
 
    🔽 수정 전 코드
 
@@ -100,7 +101,7 @@
 
     - 문자열을 비교할 때는 각 문자의 유니코드 값을 비교하여 정렬하는 방식을 사용하기 때문이다.
     - localeCompare 메소드는 유니코드 값을 기반으로 문자열을 비교하여 정렬할 수 있도록 도와준다.
-    - [🔗 sort 공부 내용 정리 블로그 링크](<https://mynamesieun.github.io/javascript/sort()%EB%A1%9C-%EB%B0%B0%EC%97%B4-%EC%A0%95%EB%A0%AC%ED%95%98%EA%B8%B0/>)<br><br>
+    - 🔗 [sort 공부 내용 정리 블로그 링크](<https://mynamesieun.github.io/javascript/sort()%EB%A1%9C-%EB%B0%B0%EC%97%B4-%EC%A0%95%EB%A0%AC%ED%95%98%EA%B8%B0/>)<br><br>
 
     | 정렬 방법 |               숫자               |                    문자열                     |
     | :-------: | :------------------------------: | :-------------------------------------------: |
@@ -125,3 +126,29 @@
 ---
 
 <br>
+
+## 2. Todolist
+
+"완료" 버튼이 클릭되면 해당 할 일의 isDone 속성을 토글하는 기능
+
+newTodos 배열은 현재의 todos 배열을 기반으로 새로운 배열을 만들어내는데, 이때 클릭된 버튼에 해당하는 할 일의 isDone 속성을 반전시킴
+
+```js
+<button
+  onClick={function () {
+    const newTodos = todos.map(function (item) {
+      if (todo.id === item.id) {
+        return {
+          ...item,
+          isDone: !item.isDone,
+        };
+      } else {
+        return item;
+      }
+    });
+    setTodos(newTodos);
+  }}
+>
+  완료
+</button>
+```

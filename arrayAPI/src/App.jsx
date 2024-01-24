@@ -11,7 +11,7 @@ function App() {
     "tangerine🍊",
   ];
 
-  const [array, setArray] = useState(initialArray); // origin array
+  const [array, setArray] = useState(initialArray); // origin array`
   const [result, setResult] = useState(""); // Result array
   const [query, setQuery] = useState(""); // input창 state
 
