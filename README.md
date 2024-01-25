@@ -129,9 +129,92 @@
 
 ## 2. Todolist
 
-"완료" 버튼이 클릭되면 해당 할 일의 isDone 속성을 토글하는 기능
+https://github.com/MyNameSieun/Todo-List 에서 만들었던 Todoist를 아무것도 참조하지 않고 다시 스스로 만들어보기 위한 목적으로 디자인을 생략하였습니다.
 
-newTodos 배열은 현재의 todos 배열을 기반으로 새로운 배열을 만들어내는데, 이때 클릭된 버튼에 해당하는 할 일의 isDone 속성을 반전시킴
+![Todolist](todolist/public/todolist.png)
+
+![](2024-01-24-19-36-20.png)
+
+### ✅ 구현 내용
+
+- state 구조
+
+```jsx
+const [todos, setTodos] = useState([{
+	id: ~,
+	title: ~,
+	contents: ~,
+	isDone: false,
+}]);
+```
+
+1. 할 일 추가
+   - 폼을 통해 제목과 내용을 입력하여 새로운 할 일을 추가할 수 있습니다.
+   - 제목이나 내용이 빈 경우, 알림 창을 통해 사용자에게 메시지가 표시됩니다.<br>
+2. 할 일 목록 표시
+   - 미완료된 할 일 목록과 완료된 할 일 목록이 각각 나누어져 표시됩니다.
+   - 할 일 목록은 TodoList 컴포넌트를 사용하여 표시되며, 각 할 일은 제목, 내용, 완료 버튼, 삭제 버튼으로 구성됩니다.
+3. 할 일 완료 및 미완료 토글
+   - 할 일 항목의 완료 버튼을 클릭하여 해당 할 일을 완료 또는 미완료로 토글할 수 있습니다.
+4. 할 일 삭제
+   - 할 일 항목의 삭제 버튼을 클릭하여 해당 할 일을 목록에서 삭제할 수 있습니다.
+
+<br>
+
+### 🌟 발생한 문제와 알게된 내용
+
+1.  할 일 완료 및 미완료 토글기능
+
+    - "완료" 버튼이 클릭되면 해당 할 일의 isDone 속성을 토글하는 기능 로직 설계에 어려움을 겪었습니다.
+    - 완료 버튼을 클릭하면 해당 항목의 isDone 속성이 토글되어 완료 여부가 변경되며, 삭제 버튼을 클릭하면 handlerDelateBtn 함수가 호출되어 해당 항목이 목록에서 제거되도록 로직을 설계하였습니다.<br><Br>
+
+    ```jsx
+    <button
+      onClick={function () {
+        const newTodos = todos.map(function (item) {
+          if (todo.id === item.id) {
+            return {
+              ...item,
+              isDone: !item.isDone,
+            };
+          } else {
+            return item;
+          }
+        });
+        setTodos(newTodos);
+      }}
+    >
+      완료
+    </button>
+    <button onClick={() => handlerDelateBtn(todo.id)}>삭제</button>
+    ```
+
+    <br>
+
+2.  todos 배열에서 listIsDone 값에 따라 완료된 항목 또는 미완료된 항목만 필터링하여 화면에 출력합니다.<br><br>
+
+```js
+{/* App.jsx */}
+<TodoList todos={todos} setTodos={setTodos} isDone={false} />{" "}
+<TodoList todos={todos} setTodos={setTodos} isDone={true} />
+```
+
+```js
+{/* TodoList.jsx */}
+function TodoList({ todos, setTodos, isDone })
+```
+
+```js
+{
+  todos
+    .filter(function (todo) {
+      return todo.isDone === listIsDone;
+    })
+    .map(function (todo) {
+      // 각 항목에 대한 JSX 출력
+    });
+}
+```
 
 ```js
 <button

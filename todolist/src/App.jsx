@@ -5,11 +5,11 @@ import { v4 as uuidv4 } from "uuid";
 import TodoList from "./components/TodoList";
 
 function App() {
+  const [todos, setTodos] = useState([]);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [todos, setTodos] = useState([]);
 
-  const handlerAddBtn = (e) => {
+  const handleAddBtn = (e) => {
     e.preventDefault();
     const newTodos = {
       id: uuidv4(),
@@ -17,44 +17,35 @@ function App() {
       content,
       isDone: false,
     };
-    console.log(title);
     if (title === "") {
-      alert("제목을 입력하세요.");
+      alert("제목을 입력해주세요.");
       return;
     }
     if (content === "") {
-      alert("내용을 입력하세요.");
+      alert("내용을 입력해주세요");
       return;
     }
-
     setTodos([...todos, newTodos]);
-    setTitle("");
     setContent("");
+    setTitle("");
   };
 
+  const handleTitleInput = (e) => {
+    setTitle(e.target.value);
+  };
+  const handleTextInput = (e) => {
+    setContent(e.target.value);
+  };
   return (
     <main>
       <form>
-        제목 :{" "}
-        <input
-          value={title}
-          onChange={function (e) {
-            setTitle(e.target.value);
-          }}
-        />
-        내용 :{" "}
-        <input
-          value={content}
-          onChange={function (e) {
-            setContent(e.target.value);
-          }}
-        />
-        <button type="submit" onClick={handlerAddBtn}>
-          추가
-        </button>
+        제목:
+        <input type="text" value={title} onChange={handleTitleInput} />
+        내용: <input type="text" value={content} onChange={handleTextInput} />
+        <button onClick={handleAddBtn}>추가</button>
       </form>
-      <TodoList todos={todos} setTodos={setTodos} listIsDone={false} />
-      <TodoList todos={todos} setTodos={setTodos} listIsDone={true} />
+      <TodoList todos={todos} setTodos={setTodos} isDone={false} />{" "}
+      <TodoList todos={todos} setTodos={setTodos} isDone={true} />
     </main>
   );
 }
