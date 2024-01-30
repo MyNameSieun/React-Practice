@@ -1,41 +1,33 @@
 // src/redux/modules/counter.js
 
-// action value
-export const PLUS_ONE = "counter/PLUS_ONE"; // value는 상수로 생성
-export const MINUS_ONE = "counter/MINUS_ONE";
+// Action Value
+const ADD_NUMBER = "ADD_NUMBER";
 
-// action creator: action value를 return하는 함수
-export const plusOne = () => {
+// Action Creator
+export const addNumber = (payload) => {
   return {
-    type: PLUS_ONE,
-  };
-};
-export const minusOne = () => {
-  return {
-    type: MINUS_ONE,
+    type: ADD_NUMBER,
+    payload: payload,
   };
 };
 
-// 초기 상태값
+// Initial State
 const initialState = {
   number: 0,
 };
 
 // 리듀서
-export const counter = (state = initialState, action) => {
-  // plusOne()는 밖으로 나가서 사용될 예정이기 때문에 export 해주기
+const counter = (state = initialState, action) => {
   switch (action.type) {
-    case PLUS_ONE: // type에는 위에서 만든 상수로 사용
+    case ADD_NUMBER:
       return {
-        number: state.number + 1,
-      };
-    case MINUS_ONE:
-      return {
-        number: state.number - 1,
+        // state.number (기존의 nubmer)에 action.paylaod(유저가 더하길 원하는 값)을 더한다.
+        number: state.number + action.payload,
       };
     default:
       return state;
   }
 };
 
+// export default reducer
 export default counter;
