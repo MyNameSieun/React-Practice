@@ -1,4 +1,4 @@
-import { useAuth } from 'provider/AuthProvider';
+import { useAuth } from '../provider/authProvider';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 
 export const ProtectedRouter = () => {

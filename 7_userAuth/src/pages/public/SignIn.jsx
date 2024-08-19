@@ -1,4 +1,4 @@
-import { useAuth } from 'provider/AuthProvider';
+import { useAuth } from '../../../src/provider/authProvider';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 const SignIn = () => {

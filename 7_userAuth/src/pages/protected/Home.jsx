@@ -1,6 +1,5 @@
 // pages/protected/Home.jsx
-
-import { useAuth } from 'provider/AuthProvider';
+import { useAuth } from '../../provider/authProvider';
 import { useNavigate } from 'react-router-dom';
 
 const Home = () => {

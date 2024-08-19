@@ -1,5 +1,5 @@
-import AuthProvider from 'provider/AuthProvider';
-import Router from './shared/Router'; // 직접 만든 Router를 사용
+import AuthProvider from './provider/authProvider';
+import Router from 'shared/Router';
 
 const App = () => {
   return (

@@ -5,7 +5,7 @@ import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom'
 import { ProtectedRouter } from './ProtectedRouter';
 import Home from 'pages/protected/Home';
 import Profile from 'pages/protected/Profile';
-import { useAuth } from 'provider/AuthProvider';
+import { useAuth } from '../provider/authProvider';
 
 const Router = () => {
   // 인증 상태를 확인합니다.
