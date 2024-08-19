@@ -3,30 +3,27 @@ import { useState } from 'react';
 const TodoSort = ({ setTodos }) => {
   const [sortOrder, setSortOrder] = useState('asc');
 
-  const handleChangeSortOrder = (e) => {
-    const selectOption = e.target.value;
-    setSortOrder(selectOption);
+  const onChangeSortOrder = (e) => {
+    const nextSortOrder = e.target.value;
 
-    setTodos((prev) =>
-      [...prev].sort((a, b) => {
-        const dateA = new Date(a.deadline);
-        const dateB = new Date(b.deadline);
+    setSortOrder(nextSortOrder);
 
-        if (selectOption === 'asc') {
-          return dateA - dateB;
-        } else {
-          return dateB - dateA;
-        }
-      })
-    );
+    if (nextSortOrder === 'asc') {
+      // 오름차순 정렬
+      setTodos((prev) => [...prev].sort((a, b) => new Date(a.deadline) - new Date(b.deadline)));
+      return;
+    }
+    //내림차순 정렬
+    setTodos((prev) => [...prev].sort((a, b) => new Date(b.deadline) - new Date(a.deadline)));
   };
 
   return (
-    <select value={sortOrder} onChange={handleChangeSortOrder}>
-      <option value="asc">오름차순</option>
-      <option value="desc">내림차순</option>
-    </select>
+    <div>
+      <select value={sortOrder} onChange={onChangeSortOrder}>
+        <option value="asc">오름차순</option>
+        <option value="desc">내림차순</option>
+      </select>
+    </div>
   );
 };
-
 export default TodoSort;
