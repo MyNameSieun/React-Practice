@@ -4,8 +4,10 @@ import NotFound from 'pages/default-set/NotFound';
 import HomePage from 'pages/protected/HomePage';
 import UserProfilePage from 'pages/protected/UserProfilePage';
 import PublicHomePage from 'pages/public/PublicHomePage';
+import SearchPage from 'pages/public/SearchPage';
 import SignInPage from 'pages/public/SignInPage';
 import SignUpPage from 'pages/public/SignUpPage';
+import TestPage from 'pages/public/TestPage';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 
 const Router = () => {
@@ -17,6 +19,8 @@ const Router = () => {
           <Route path="/" element={<PublicHomePage />} />
           <Route path="sign-in" element={<SignInPage />} />
           <Route path="sign-up" element={<SignUpPage />} />
+          <Route path="search" element={<SearchPage />} />
+          <Route path="test" element={<TestPage />} />
         </Route>
 
         {/* 로그인이 필요한 라우터 */}
