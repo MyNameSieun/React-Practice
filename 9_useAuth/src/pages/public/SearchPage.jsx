@@ -30,7 +30,7 @@ const SearchPage = () => {
 
   return (
     <div>
-      <h1>Posting 정보 보기</h1>
+      <h1>Posting 정보 보기(검색페이지)</h1>
       <div>{userId ? <p>아이디 {userId}님이 쓰신 글</p> : <p>아래 두 버튼 중 하나를 선택해주세요.</p>}</div>
       <button onClick={() => updateSearch(1)}>1번 유저의 글 보기</button>
       <button onClick={() => updateSearch(2)}>2번 유저의 글 보기</button>

@@ -6,7 +6,7 @@ const AuthLayout = () => {
 
   if (!isAuthenticated) {
     alert('로그인이 필요한페이지입니다. 로그인 페이지로 이동할게요!');
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/sign-in" replace />;
   }
   return (
     <>
