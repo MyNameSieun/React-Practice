@@ -1,5 +1,6 @@
 import AuthLayout from 'components/layouts/AuthLayout';
 import Layout from 'components/layouts/Layout';
+import NonAuthLayout from 'components/layouts/NonAuthLayout';
 import NotFound from 'pages/default-set/NotFound';
 import HomePage from 'pages/protected/HomePage';
 import UserProfilePage from 'pages/protected/UserProfilePage';
@@ -8,7 +9,7 @@ import SearchPage from 'pages/public/SearchPage';
 import SignInPage from 'pages/public/SignInPage';
 import SignUpPage from 'pages/public/SignUpPage';
 import TestPage from 'pages/public/TestPage';
-import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 const Router = () => {
   return (
@@ -23,6 +24,9 @@ const Router = () => {
           <Route path="test" element={<TestPage />} />
         </Route>
 
+        {/* 로그인 상태가 반드시 아니어야 하는 라우터 */}
+        <Route element={<NonAuthLayout />}></Route>
+
         {/* 로그인이 필요한 라우터 */}
         <Route element={<AuthLayout />}>
           <Route path="/" element={<HomePage />} />
@@ -33,7 +37,7 @@ const Router = () => {
         <Route path="*" element={<NotFound />} />
 
         {/* 사용자가 잘못된 경로로 이동했을 때 기본적으로 (/)로 리다이렉션 */}
-        <Route path="*" element={<Navigate replace to="/" />} />
+        {/* <Route path="*" element={<Navigate replace to="/" />} /> */}
       </Routes>
     </BrowserRouter>
   );

@@ -1,4 +1,4 @@
-import postAxios from '../../axios/post';
+import postsAxios from '../../axios/posts';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
@@ -16,7 +16,7 @@ const SearchPage = () => {
   useEffect(() => {
     const getPosts = async () => {
       try {
-        const res = await postAxios.get('/');
+        const res = await postsAxios.get('/');
         setPosts(res.data);
       } catch (error) {
         alert('글 목록을 가져오는 중 오류가 발생하였습니다.');
