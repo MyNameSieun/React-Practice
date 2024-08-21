@@ -25,6 +25,8 @@ const PublicHomePage = () => {
             <StLink to="/user/2">2번 유저의 정보</StLink>
           </StListItem>
         </StList>
+
+        <Link to="/write-post">글 작성하기</Link>
       </StListContainer>
     </StContainer>
   );

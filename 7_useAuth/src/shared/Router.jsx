@@ -10,6 +10,7 @@ import SignInPage from 'pages/public/SignInPage';
 import SignUpPage from 'pages/public/SignUpPage';
 import TestPage from 'pages/public/TestPage';
 import UserProfilePage from 'pages/public/UserProfilePage';
+import WritePostPage from 'pages/public/WritePostPage';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 const Router = () => {
@@ -23,6 +24,7 @@ const Router = () => {
           <Route path="sign-up" element={<SignUpPage />} />
           <Route path="search" element={<SearchPage />} />
           <Route path="test" element={<TestPage />} />
+          <Route path="write-post" element={<WritePostPage />} />
           <Route path="/user/:userId" element={<UserProfilePage />} />
         </Route>
 
