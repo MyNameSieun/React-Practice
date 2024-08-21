@@ -1,8 +1,9 @@
 {
   "posts": [
     { "id": 1, "writeUserId": 1, "title": "오늘의 일기입니당", "body": "열심히 코딩중!", "author": "재건" },
-    { "id": 2, "writeUserId": 2, "title": "밖에 비가 올까요?", "body": "날씨가 우중충하네요ㅜ", "author": "시은" }
+    { "id": 2, "writeUserId": 2, "title": "밖에 비가 올까요?", "body": "날씨가 우중충하네요ㅜ", "author": "시은" },
+    { "id": 3, "writeUserId": 2, "title": "오늘의 행운은?", "body": "럭키!", "author": "시은" }
   ],
-  "comments": [{ "id": 1, "body": "댓글1", "postId": 1 }],
+  "comments": [{ "id": 1, "body": "저는 천재입니다.", "postId": 1 }],
   "profile": { "name": "typicode" }
 }

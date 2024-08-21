@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { authApi } from '../../axios/auth';
 import styled from 'styled-components';
@@ -7,7 +7,7 @@ const SignUpPage = () => {
   const idRef = useRef(null);
   const pwRef = useRef(null);
   const nickNameRef = useRef(null);
-
+  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -18,19 +18,18 @@ const SignUpPage = () => {
     e.preventDefault();
 
     try {
-      await authApi.post(`/register`, {
+      await authApi.post('/register', {
         id: idRef.current.value,
         password: pwRef.current.value,
         nickname: nickNameRef.current.value
       });
       // 성공 시
-      alert('회원가입이 완료되었습니다.');
-      navigate('/login');
+      alert('회원가입이 완료되었습니다. 로그인 페이지로 이동합니다.');
+      navigate('/sign-in');
     } catch (error) {
       // 실패 시
-      const message = error.response.data.message;
-      alert(message || '회원가입 중 문제가 발생했습니다.'); // 사용자 확인
-      console.log(message); // 개발자 확인
+      const message = error.response?.data?.message || '회원가입 중 문제가 발생했습니다.';
+      setErrorMessage(message); // 상태를 통해 오류 메시지 표시
     }
   };
 
@@ -44,12 +43,11 @@ const SignUpPage = () => {
         <StInput type="text" id="nickname" ref={nickNameRef} placeholder="닉네임을 입력하세요." />
         <StLabel htmlFor="password">비밀번호</StLabel>
         <StInput type="password" id="password" ref={pwRef} placeholder="비밀번호를 입력하세요." />
+        {errorMessage && <StError>{errorMessage}</StError>}
         <StButton type="submit">회원가입</StButton>
         <StButton
           type="button"
-          onClick={() => {
-            navigate('/sign-in');
-          }}
+          onClick={() => navigate('/sign-in')}
           style={{ backgroundColor: '#6c757d', borderColor: '#6c757d' }}
         >
           로그인하러 가기
@@ -111,6 +109,11 @@ const StButton = styled.button`
   &:hover {
     background-color: #0056b3;
   }
+`;
+
+const StError = styled.p`
+  color: #d9534f;
+  margin: 0.5rem 0;
 `;
 
 export default SignUpPage;

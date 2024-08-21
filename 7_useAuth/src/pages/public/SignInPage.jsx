@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { authApi } from '../../axios/auth';
 import styled from 'styled-components';
@@ -6,7 +6,7 @@ import styled from 'styled-components';
 const SignInPage = () => {
   const idRef = useRef(null);
   const pwRef = useRef(null);
-
+  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -15,6 +15,12 @@ const SignInPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // 유효성 검사
+    if (!idRef.current.value || !pwRef.current.value) {
+      setErrorMessage('아이디와 비밀번호를 모두 입력해 주세요.');
+      return;
+    }
 
     try {
       const res = await authApi.post('/login', {
@@ -33,15 +39,14 @@ const SignInPage = () => {
 
       navigate('/');
 
-      if (!res.data.accessToken) {
+      if (!accessToken) {
         alert('토큰이 없습니다. 고객센터에 문의해주세요.');
         return;
       }
     } catch (error) {
       // 로그인 실패 시
-      const message = error.response.data.message;
-      alert(message || '로그인 중 문제가 발생했습니다.'); // 사용자 확인
-      console.log(message); // 개발자 확인
+      const message = error.response?.data?.message || '로그인 중 문제가 발생했습니다.';
+      setErrorMessage(message); // 상태를 통해 오류 메시지 표시
     }
   };
 
@@ -51,14 +56,16 @@ const SignInPage = () => {
       <StForm onSubmit={handleSubmit}>
         <StLabel htmlFor="id">아이디: </StLabel>
         <StInput type="text" id="id" ref={idRef} placeholder="아이디를 입력하세요." />
+
         <StLabel htmlFor="password">비밀번호</StLabel>
         <StInput type="password" id="password" ref={pwRef} placeholder="비밀번호를 입력하세요." />
+
+        {errorMessage && <StError>{errorMessage}</StError>}
+
         <StButton type="submit">로그인</StButton>
         <StButton
           type="button"
-          onClick={() => {
-            navigate('/sign-up');
-          }}
+          onClick={() => navigate('/sign-up')}
           style={{ backgroundColor: '#6c757d', borderColor: '#6c757d' }}
         >
           회원가입하러 가기
@@ -120,6 +127,11 @@ const StButton = styled.button`
   &:hover {
     background-color: #0056b3;
   }
+`;
+
+const StError = styled.p`
+  color: #d9534f;
+  margin: 0.5rem 0;
 `;
 
 export default SignInPage;

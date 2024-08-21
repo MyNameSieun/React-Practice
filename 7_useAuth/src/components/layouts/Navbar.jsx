@@ -23,7 +23,10 @@ const Navbar = () => {
       <StNavContainer>
         <StNavLink to="/">Home</StNavLink>
         {at ? (
-          <StLogoutButton onClick={handleLogoutButton}>로그아웃</StLogoutButton>
+          <StAuthLinks>
+            <StLogoutButton onClick={handleLogoutButton}>로그아웃</StLogoutButton>
+            <StNavLink to="/my-page">마이페이지</StNavLink>
+          </StAuthLinks>
         ) : (
           <StAuthLinks>
             <StNavLink to="/sign-in">로그인</StNavLink>
@@ -40,11 +43,11 @@ export default Navbar;
 const StNav = styled.nav`
   background-color: #f8f9fa;
   padding: 10px 20px;
-
   border-bottom: 1px solid #ddd;
 `;
 
 const StNavContainer = styled(CommonContainer)`
+  display: flex;
   justify-content: space-between;
   align-items: center;
 `;
@@ -54,32 +57,38 @@ const StNavLink = styled(NavLink)`
   text-decoration: none;
   padding: 10px 15px;
   font-size: 16px;
-  font-weight: 500;
   transition: color 0.3s ease, background-color 0.3s ease;
+  border-radius: 5px;
 
   &.active {
     font-weight: bold;
     color: #007bff;
     background-color: #e9ecef;
-    border-radius: 5px;
   }
 
   &:hover {
     color: #0056b3;
+    background-color: #f1f1f1;
   }
 `;
 
-const StLogoutButton = styled.div`
-  cursor: pointer;
+const StLogoutButton = styled.button`
+  background: none;
+  border: none;
   color: #dc3545;
   font-size: 16px;
   font-weight: 500;
-  padding: 10px 15px;
   border-radius: 5px;
-  transition: background-color 0.3s ease;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
 
   &:hover {
     background-color: #f8d7da;
+    color: #a71d2a;
+  }
+
+  &:focus {
+    outline: none;
   }
 `;
 

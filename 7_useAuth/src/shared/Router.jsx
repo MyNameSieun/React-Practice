@@ -3,12 +3,13 @@ import Layout from 'components/layouts/Layout';
 import NonAuthLayout from 'components/layouts/NonAuthLayout';
 import NotFound from 'pages/default-set/NotFound';
 import HomePage from 'pages/protected/HomePage';
-import UserProfilePage from 'pages/protected/UserProfilePage';
+import MyPage from 'pages/protected/MyPage';
 import PublicHomePage from 'pages/public/PublicHomePage';
 import SearchPage from 'pages/public/SearchPage';
 import SignInPage from 'pages/public/SignInPage';
 import SignUpPage from 'pages/public/SignUpPage';
 import TestPage from 'pages/public/TestPage';
+import UserProfilePage from 'pages/public/UserProfilePage';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 const Router = () => {
@@ -22,6 +23,7 @@ const Router = () => {
           <Route path="sign-up" element={<SignUpPage />} />
           <Route path="search" element={<SearchPage />} />
           <Route path="test" element={<TestPage />} />
+          <Route path="/user/:userId" element={<UserProfilePage />} />
         </Route>
 
         {/* 로그인 상태가 반드시 아니어야 하는 라우터 */}
@@ -30,7 +32,7 @@ const Router = () => {
         {/* 로그인이 필요한 라우터 */}
         <Route element={<AuthLayout />}>
           <Route path="/" element={<HomePage />} />
-          <Route path="/user/:userId" element={<UserProfilePage />} />
+          <Route path="/my-page" element={<MyPage />} />
         </Route>
 
         {/* 404 Not Found */}

@@ -1,13 +1,34 @@
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { authApi } from '../../axios/auth';
 
-const UserProfilePage = () => {
-  // 예시 데이터: 실제 데이터는 API 호출 등을 통해 가져오도록 수정해야 합니다.
-  const user = {
-    avatar: 'https://via.placeholder.com/150', // 사용자 아바타 URL
-    nickname: 'John Doe',
-    email: 'john.doe@example.com',
-    bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sit amet accumsan arcu.'
-  };
+const MyPage = () => {
+  const [user, setUser] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await authApi.get('/user'); // 인증이 필요하므로 authApi를 사용
+        setUser(response.data);
+      } catch (error) {
+        setError('Failed to fetch user data');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>{error}</p>;
+  }
 
   return (
     <StContainer>
@@ -23,7 +44,7 @@ const UserProfilePage = () => {
   );
 };
 
-export default UserProfilePage;
+export default MyPage;
 
 const StContainer = styled.div`
   display: flex;

@@ -8,6 +8,7 @@ const AuthLayout = () => {
 
   if (!isAuthenticated) {
     alert('로그인이 필요한 페이지입니다. 로그인 페이지로 이동할게요!');
+    // replace를 사용하여 이전 페이지로 돌아가는 것을 방지(새로운 히스토리로 덮어씌우기)
     return <Navigate to="/sign-in" replace />;
   }
 
