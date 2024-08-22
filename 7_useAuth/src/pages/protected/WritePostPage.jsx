@@ -1,8 +1,9 @@
 import { PostsContext } from '../../context/PostsContext';
 import postsAxios from '../../axios/posts';
-import { useContext, useEffect, useRef } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { v4 as uuid } from 'uuid';
 import { useNavigate } from 'react-router-dom';
+import { authApi } from '../../axios/auth';
 
 const WritePostPage = () => {
   const { posts, setPosts } = useContext(PostsContext);
@@ -10,9 +11,21 @@ const WritePostPage = () => {
 
   const titleRef = useRef(null);
   const contentRef = useRef(null);
+  const [nickname, setNickname] = useState('');
 
   useEffect(() => {
     titleRef.current.focus();
+
+    const getAthor = async () => {
+      try {
+        const res = await authApi.get('/user');
+        const { avator, id, nickname } = res.data;
+        setNickname(nickname);
+      } catch (error) {
+        console.error('유저 정보를 가져오는 중 오류가 발생했습니다.');
+      }
+    };
+    getAthor();
   }, []);
 
   const handleSubmit = (e) => {
@@ -23,7 +36,8 @@ const WritePostPage = () => {
         const res = await postsAxios.post('/', {
           id: uuid(),
           title: titleRef.current.value,
-          body: contentRef.current.value
+          body: contentRef.current.value,
+          author: nickname
         });
         setPosts((prev) => [...prev, res.data]);
         alert('글 작성이 완료되었습니다!');

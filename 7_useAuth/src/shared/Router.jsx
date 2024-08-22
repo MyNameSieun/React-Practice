@@ -4,13 +4,14 @@ import NonAuthLayout from 'components/layouts/NonAuthLayout';
 import NotFound from 'pages/default-set/NotFound';
 import HomePage from 'pages/protected/HomePage';
 import MyPage from 'pages/protected/MyPage';
+import WritePostPage from 'pages/protected/WritePostPage';
+import PostList from 'pages/public/PostList';
 import PublicHomePage from 'pages/public/PublicHomePage';
 import SearchPage from 'pages/public/SearchPage';
 import SignInPage from 'pages/public/SignInPage';
 import SignUpPage from 'pages/public/SignUpPage';
 import TestPage from 'pages/public/TestPage';
 import UserProfilePage from 'pages/public/UserProfilePage';
-import WritePostPage from 'pages/public/WritePostPage';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 const Router = () => {
@@ -24,7 +25,7 @@ const Router = () => {
           <Route path="sign-up" element={<SignUpPage />} />
           <Route path="search" element={<SearchPage />} />
           <Route path="test" element={<TestPage />} />
-          <Route path="write-post" element={<WritePostPage />} />
+          <Route path="post-list" element={<PostList />} />
           <Route path="/user/:userId" element={<UserProfilePage />} />
         </Route>
 
@@ -35,6 +36,7 @@ const Router = () => {
         <Route element={<AuthLayout />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/my-page" element={<MyPage />} />
+          <Route path="write-post" element={<WritePostPage />} />
         </Route>
 
         {/* 404 Not Found */}

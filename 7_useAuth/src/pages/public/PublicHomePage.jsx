@@ -27,6 +27,7 @@ const PublicHomePage = () => {
         </StList>
 
         <Link to="/write-post">글 작성하기</Link>
+        <Link to="/post-list">글 목록보기</Link>
       </StListContainer>
     </StContainer>
   );
