@@ -2,7 +2,6 @@ import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom'
 import HomePage from 'pages/protected/HomePage';
 import PostListPage from 'pages/public/PostListPage';
 import SignupPage from 'pages/public/SignupPage';
-import ProfilePage from 'pages/public/UserProfilePage';
 import MyPage from 'pages/protected/MyPage';
 import SigninPage from 'pages/public/SigninPage';
 import PostDetailPage from 'pages/public/PostDetailPage';
@@ -22,8 +21,7 @@ const Router = () => {
     { path: '/post-detail', element: <PostDetailPage /> },
     { path: '/user-profile', element: <UserProfilePage /> },
     { path: '/sign-in', element: <SigninPage /> },
-    { path: '/sign-up', element: <SignupPage /> },
-    { path: '/profile', element: <ProfilePage /> }
+    { path: '/sign-up', element: <SignupPage /> }
   ];
 
   // 비인증 사용자 전용 라우트 설정
