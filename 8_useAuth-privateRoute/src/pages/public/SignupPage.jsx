@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { register } from '../../api/auth';
 
@@ -9,7 +9,6 @@ const SignupPage = () => {
   const [password1, setPassword1] = useState('');
   const [password2, setPassword2] = useState('');
   const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -20,10 +19,12 @@ const SignupPage = () => {
     }
     try {
       await register({ name, nickname, email, password1, password2 });
-      setSuccess('회원 가입이 완료되었습니다.');
+      alert('회원 가입이 완료되었습니다.');
       navigate('/sign-in'); // 회원 가입 성공 후 로그인 페이지로 리다이렉트
-    } catch (err) {
-      setError('회원 가입에 실패했습니다. 이메일이 이미 등록되었는지 확인해주세요.');
+    } catch (error) {
+      const message = error.response.data;
+      setError(message || '회원가입 중 문제가 발생했습니다.'); // 사용자 확인
+      console.log(message); // 개발자 확인
     }
   };
 
@@ -63,8 +64,7 @@ const SignupPage = () => {
             required
           />
         </div>
-        {error && <p>{error}</p>}
-        {success && <p>{success}</p>}
+        {error && <p style={{ color: 'red' }}>{error}</p>}
         <button type="submit">회원 가입</button>
       </form>
     </div>

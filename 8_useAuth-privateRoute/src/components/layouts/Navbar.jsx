@@ -1,100 +1,70 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import { logout } from 'api/auth';
+import AuthContext from 'context/AuthContext';
+import { useContext } from 'react';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-import { useAuth } from '../../context/AuthContext'; // 인증 상태를 확인하기 위한 훅
 
 const Navbar = () => {
-  const { isSignIn, logout } = useAuth(); // 인증 상태와 로그아웃 함수 가져오기
+  const { setUser, isSignIn } = useContext(AuthContext);
+
+  const hanldeLogout = async () => {
+    try {
+      const logoutConfirm = window.confirm('정말 로그아웃 하시겠습니까?');
+      if (logoutConfirm) {
+        await logout();
+        alert('로그아웃 되었습니다.');
+        setUser(null);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
-    <HeaderContainer>
-      <Logo>
-        <StyledLink to="/">Bored</StyledLink>
-      </Logo>
-      <Nav>
-        <NavList>
-          {isSignIn ? (
-            <>
-              <NavItem>
-                <StyledLink to="/my-page">마이페이지</StyledLink>
-              </NavItem>
-              <NavItem>
-                <StyledLink to="/post-form">글 작성</StyledLink>
-              </NavItem>
-              <NavItem>
-                <StyledLink to="/post-list">글 목록</StyledLink>
-              </NavItem>
-              <NavItem>
-                <LogoutButton onClick={logout}>로그아웃</LogoutButton>
-              </NavItem>
-            </>
-          ) : (
-            <>
-              <NavItem>
-                <StyledLink to="/sign-in">로그인</StyledLink>
-              </NavItem>
-              <NavItem>
-                <StyledLink to="/sign-up">회원가입</StyledLink>
-              </NavItem>
-              <NavItem>
-                <StyledLink to="/post-list">글 목록</StyledLink>
-              </NavItem>
-            </>
-          )}
-        </NavList>
-      </Nav>
-    </HeaderContainer>
+    <StNavbarContainer>
+      <StNavLink to="/">로고</StNavLink>
+      <StNav>
+        {isSignIn ? (
+          <>
+            <StNavLink to="/my-page">마이페이지</StNavLink>
+            <StNavLink to="/post-form">글 작성</StNavLink>
+            <StNavLink to="/post-list">글 목록</StNavLink>
+            <StLogout onClick={hanldeLogout}>로그아웃</StLogout>
+          </>
+        ) : (
+          <>
+            <StNavLink to="/post-list">글 목록</StNavLink>
+            <StNavLink to="/my-page">마이페이지</StNavLink>
+            <StNavLink to="/sign-in">로그인</StNavLink>
+            <StNavLink to="/sign-up">회원가입</StNavLink>
+          </>
+        )}
+      </StNav>
+    </StNavbarContainer>
   );
 };
 
 export default Navbar;
 
-// Styled components
-const HeaderContainer = styled.header`
+const StNavbarContainer = styled.nav`
+  height: 50px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
-  background-color: #333;
-  color: #fff;
-  height: 60px;
+  justify-content: space-between;
 `;
 
-const Logo = styled.div`
-  font-size: 24px;
+const StNav = styled.div`
+  display: flex;
+  justify-content: end;
 `;
-
-const StyledLink = styled(Link)`
-  color: #fff;
-  text-decoration: none;
-
-  &:hover {
-    text-decoration: underline;
+const StNavLink = styled(NavLink)`
+  margin: 0 6px;
+  &.active {
+    color: red;
+    font-weight: bold;
   }
 `;
 
-const Nav = styled.nav`
-  display: flex;
-`;
-
-const NavList = styled.ul`
-  display: flex;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-`;
-
-const NavItem = styled.li`
-  margin-left: 20px;
-`;
-
-const LogoutButton = styled.button`
-  background-color: transparent;
-  border: none;
-  color: #fff;
+const StLogout = styled.div`
   cursor: pointer;
-
-  &:hover {
-    text-decoration: underline;
-  }
 `;

@@ -1,5 +1,11 @@
+import React from 'react';
+
 const HomePage = () => {
-  return <div>HomePage / 로그인한 사람만 접근 가능</div>;
+  return (
+    <div>
+      <p>로그인 한사용자만 접근 가능</p>
+    </div>
+  );
 };
 
 export default HomePage;
