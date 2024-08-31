@@ -39,7 +39,7 @@ export const updatePost = async (id, data) => {
   formData.append('title', data.title);
   formData.append('content', data.content);
 
-  return await postsAxios.put(`/posts/${id}`, data, {
+  return await postsAxios.put(`/posts/${id}`, formData, {
     headers: {
       'Content-Type': 'multipart/form-data'
     }

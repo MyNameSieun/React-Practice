@@ -12,6 +12,11 @@ const PostFormPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!title || !content) {
+      alert('제목과 내용을 모두 입력해 주세요.');
+      return;
+    }
+
     try {
       await createPost({ title, content });
       alert('게시물 작성이 완료되었습니다!');
