@@ -26,9 +26,9 @@ const GlobalStyle = createGlobalStyle`
     footer, header, hgroup, menu, nav, section {
         display: block;
     }
-    body {
+    /* body {
         line-height: 1;
-    }
+    } */
     ol, ul {
         list-style: none;
     }
@@ -48,7 +48,7 @@ const GlobalStyle = createGlobalStyle`
     // 속성 추가
     *{
         box-sizing:border-box;
-        text-decoration-line:none;
+        /* text-decoration-line:none; */
         color: inherit;
     }
 

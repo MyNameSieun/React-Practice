@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const commentsAxios = axios.create({
-  BaseURL: process.env.REACT_APP_SERVER_URL,
+  baseURL: process.env.REACT_APP_SERVER_URL,
   withCredentials: true
 });
 
@@ -26,7 +26,7 @@ export const fetchComments = async (postId) => {
 };
 
 // 댓글에 답글 작성
-export const createReply = async (content) => {
+export const createReply = async (parentId, content) => {
   return await commentsAxios.post(`/reply/${parentId}`, { content });
 };
 

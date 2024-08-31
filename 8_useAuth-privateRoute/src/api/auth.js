@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 const authAxios = axios.create({
-  baseURL: process.env.REACT_APP_SERVER_URL,
-  withCredentials: true
+  baseURL: process.env.REACT_APP_SERVER_URL, // 환경 변수에서 기본 URL을 설정
+  withCredentials: true // 쿠키를 자동으로 포함시키기 위한 설정
 });
 
 // Axios 인스턴스 생성
@@ -15,6 +15,19 @@ authAxios.interceptors.request.use(
     return Promise.reject({ state: 'ERROR', message: error.message });
   }
 );
+
+// authApi.interceptors.response.use(
+//   (response) => {
+//     return response;
+//   },
+//   (error) => {
+//     if (error.response && error.response.status === 401) {
+//       // 로그인 페이지로 리디렉션
+//       window.location.href = '/sign-in';
+//     }
+//     return Promise.reject(error);
+//   }
+// );
 
 // 회원 가입
 export const register = async (data) => {

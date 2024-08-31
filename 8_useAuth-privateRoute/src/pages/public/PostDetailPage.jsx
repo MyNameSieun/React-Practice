@@ -8,6 +8,8 @@ import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
 import AuthContext from 'context/AuthContext';
 import TextEditor from 'components/TextEditor';
+import CommentsList from 'components/comments/CommentsList';
+import CommentForm from 'components/comments/CommentForm';
 
 const PostDetailPage = () => {
   const [post, setPost] = useState(null);
@@ -29,6 +31,7 @@ const PostDetailPage = () => {
         setContent(response.data.content);
       } catch (error) {
         console.error(error);
+        alert(error.response.data);
       } finally {
         setLoading(false);
       }
@@ -103,15 +106,16 @@ const PostDetailPage = () => {
           ) : (
             <>
               <li>제목: {post.title}</li>
-              <li>
-                내용:
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: DOMPurify.sanitize(post.content)
-                  }}
-                />
-              </li>
+              내용:
+              <li
+                dangerouslySetInnerHTML={{
+                  __html: DOMPurify.sanitize(post.content)
+                }}
+              />
               <li>작성일: {post.createdAt}</li>
+              <p>작성자: {post.author.nickname}</p>
+              <CommentForm id={id} />
+              <CommentsList id={id} />
               {user && user.id === post.author.id && (
                 <>
                   <button onClick={handleDeleteButton}>삭제</button>

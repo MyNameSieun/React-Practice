@@ -23,6 +23,7 @@ const PostFormPage = () => {
       navigate('/post-list');
     } catch (error) {
       console.error('Error creating post:', error);
+      alert(error.response.data);
     }
   };
 
