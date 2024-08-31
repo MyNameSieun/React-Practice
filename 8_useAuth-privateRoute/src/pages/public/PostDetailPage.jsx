@@ -14,9 +14,9 @@ import CommentForm from 'components/comments/CommentForm';
 const PostDetailPage = () => {
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [isEditing, setIsEditing] = useState(false); // 수정 모드 상태
-  const [title, setTitle] = useState(''); // 제목 상태
-  const [content, setContent] = useState(''); // 내용 상태
+  const [isEditing, setIsEditing] = useState(false);
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
 
   const { user } = useContext(AuthContext);
   const { id } = useParams();

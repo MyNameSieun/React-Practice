@@ -17,7 +17,7 @@ const CommentsList = ({ id }) => {
       }
     };
     loadComments();
-  }, []);
+  }, [comments]);
 
   if (loading) {
     return <p>로딩중...</p>;
