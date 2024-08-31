@@ -6,31 +6,31 @@ const commentsAxios = axios.create({
 });
 
 // 댓글 작성
-const writeComment = async (postId, conetent) => {
+export const writeComment = async (postId, content) => {
   return await commentsAxios.post(`/posts/${postId}/comment`, { content });
 };
 
 // 댓글 수정
-const updateComment = async (postId, commentId, conetent) => {
+export const updateComment = async (postId, commentId, content) => {
   return await commentsAxios.put(`/posts/${postId}/comment/${commentId}`, { content });
 };
 
 // 댓글 삭제
-const deleteComment = async (postId, commentId) => {
+export const deleteComment = async (postId, commentId) => {
   return await commentsAxios.delete(`/posts/${postId}/comment/${commentId}`);
 };
 
 // 댓글 조회
-const fetchComments = async (postId) => {
+export const fetchComments = async (postId) => {
   return await commentsAxios.get(`/posts/${postId}/comments`);
 };
 
 // 댓글에 답글 작성
-const createReply = async (content) => {
+export const createReply = async (content) => {
   return await commentsAxios.post(`/reply/${parentId}`, { content });
 };
 
 // 댓글에 답글 조회
-const fetchReplies = async (parentId) => {
+export const fetchReplies = async (parentId) => {
   return await commentsAxios.get(`/comments/${parentId}/replies`);
 };

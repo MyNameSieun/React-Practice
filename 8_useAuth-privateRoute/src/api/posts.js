@@ -1,31 +1,47 @@
 import axios from 'axios';
 
-const postAxios = axios.create({
+const postsAxios = axios.create({
   baseURL: process.env.REACT_APP_SERVER_URL,
   withCredentials: true
 });
 
 // 게시글 작성
-const createPost = async (data) => {
-  return await postAxios.post(`/posts/new`, { data });
+export const createPost = async (data) => {
+  const formData = new FormData();
+  formData.append('title', data.title);
+  formData.append('content', data.content);
+
+  return await postsAxios.post(`/posts/new`, formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  });
 };
 
 // 게시글 목록 조회
-const fetchPosts = async (data) => {
-  return await postAxios.get(`/posts`, { data });
+export const fetchPosts = async () => {
+  return await postsAxios.get(`/posts`);
 };
 
-// 게시글 조회
-const fetchPostById = async (id) => {
-  return await postAxios.get(`/posts/${id}`);
+// 특정 게시글 조회
+export const fetchPostById = async (id) => {
+  return await postsAxios.get(`/posts/${id}`);
 };
 
 // 게시글 삭제
-const deletePost = async (id) => {
-  return await postAxios.delete(`/posts/${id}`);
+export const deletePost = async (id) => {
+  return await postsAxios.delete(`/posts/${id}`);
 };
 
 // 게시글 수정
-const updatePost = async (id) => {
-  return await postAxios.put(`/posts/${id}`);
+export const updatePost = async (id, data) => {
+  const formData = new FormData();
+  formData.append('title', data.title);
+  formData.append('content', data.content);
+
+  return await postsAxios.put(`/posts/${id}`, data, {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  });
 };
