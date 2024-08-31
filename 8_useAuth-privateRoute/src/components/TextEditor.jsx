@@ -1,12 +1,8 @@
-import { useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import styled from 'styled-components';
 import { CustomToolbar } from 'styles/CustomToolbar';
 
-const TextEditor = () => {
-  const [value, setValue] = useState('');
-
+const TextEditor = ({ value, onChange }) => {
   // 툴바 설정
   const modules = {
     toolbar: {
@@ -31,18 +27,18 @@ const TextEditor = () => {
     'image',
     'video',
     'color',
-    'background '
+    'background'
   ];
 
   return (
     <div>
       <CustomToolbar />
-      <StReactQuill
+      <ReactQuill
         theme="snow"
         modules={modules}
         formats={formats}
         value={value}
-        onChange={setValue}
+        onChange={onChange}
         style={{ height: '70vh' }}
       />
     </div>
@@ -50,26 +46,3 @@ const TextEditor = () => {
 };
 
 export default TextEditor;
-
-const StReactQuill = styled(ReactQuill)`
-  /* 폰트 */
-  & .ql-editor {
-    font-family: inherit;
-    font-size: inherit;
-  }
-
-  /* 텍스트 굵기 */
-  & .ql-editor strong {
-    font-weight: bold;
-  }
-
-  /* 기울임 */
-  & .ql-editor em {
-    font-style: italic;
-  }
-
-  /* 밑줄 */
-  & .ql-editor u {
-    text-decoration: underline;
-  }
-`;

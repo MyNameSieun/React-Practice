@@ -2,7 +2,8 @@ import { fetchPosts } from 'api/posts';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import DOMPurify from 'dompurify'; // dompurify import
+import 'react-quill/dist/quill.snow.css';
+import DOMPurify from 'dompurify';
 
 const PostListPage = () => {
   const [posts, setPosts] = useState([]);
@@ -33,10 +34,15 @@ const PostListPage = () => {
         <ul>
           {posts.map((post) => (
             <StPostItem key={post.id} onClick={() => navigate(`/posts/${post.id}`)}>
-              <p>제목: {post.title}</p>
+              <h3>제목: {post.title}</h3>
               <div
                 dangerouslySetInnerHTML={{
-                  __html: DOMPurify.sanitize(post.content) // 콘텐츠를 dompurify로 sanitize
+                  __html: DOMPurify.sanitize(post.content)
+                }}
+                style={{
+                  marginTop: '30px',
+                  overflow: 'hidden',
+                  whiteSpace: 'pre-wrap'
                 }}
               />
               <p>작성일: {post.createdAt}</p>

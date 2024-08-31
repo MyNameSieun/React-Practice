@@ -7,7 +7,8 @@ export const CustomToolbar = () => (
         <option value="large">Large</option>
         <option value="huge">Huge</option>
       </select>
-      <select className="ql-header">
+      <select className="ql-header" defaultValue="">
+        <option value="">Normal</option>
         <option value="1">Header 1</option>
         <option value="2">Header 2</option>
         <option value="3">Header 3</option>

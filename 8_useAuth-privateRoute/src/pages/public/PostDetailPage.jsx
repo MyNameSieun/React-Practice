@@ -2,6 +2,7 @@ import { fetchPostById } from 'api/posts';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import DOMPurify from 'dompurify'; // dompurify import
+import 'react-quill/dist/quill.snow.css';
 
 const PostDetailPage = () => {
   const [post, setPost] = useState(null);
@@ -37,6 +38,11 @@ const PostDetailPage = () => {
             <div
               dangerouslySetInnerHTML={{
                 __html: DOMPurify.sanitize(post.content) // 콘텐츠를 dompurify로 sanitize
+              }}
+              style={{
+                marginTop: '30px',
+                overflow: 'hidden',
+                whiteSpace: 'pre-wrap'
               }}
             />
           </li>
