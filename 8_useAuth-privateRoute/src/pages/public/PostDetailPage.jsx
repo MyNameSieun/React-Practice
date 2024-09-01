@@ -17,6 +17,7 @@ const PostDetailPage = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [refreshComments, setRefreshComments] = useState(false); // 댓글 새로 고침 상태
 
   const { user } = useContext(AuthContext);
   const { id } = useParams();
@@ -37,7 +38,7 @@ const PostDetailPage = () => {
       }
     };
     loadDetailpost();
-  }, [id]);
+  }, [id, refreshComments]);
 
   if (loading) {
     return <p>로딩중...</p>;
@@ -67,12 +68,13 @@ const PostDetailPage = () => {
   const handleSaveButton = async () => {
     try {
       await updatePost(id, { title, content });
-      // 서버에서 데이터를 다시 가져옴
-      const response = await fetchPostById(id);
-      setPost(response.data);
+      setPost((prevPost) => ({
+        ...prevPost,
+        title,
+        content
+      }));
       setIsEditing(false);
       alert('게시글이 수정되었습니다.');
-      navigate(`/posts/${id}`, { replace: true });
     } catch (error) {
       console.error(error);
     }
@@ -83,6 +85,11 @@ const PostDetailPage = () => {
     setIsEditing(false);
     setTitle(post.title);
     setContent(post.content);
+  };
+
+  // 댓글 새로 고침 상태 토글
+  const handleCommentUpdate = () => {
+    setRefreshComments((prev) => !prev);
   };
 
   return (
@@ -114,8 +121,8 @@ const PostDetailPage = () => {
               />
               <li>작성일: {post.createdAt}</li>
               <p>작성자: {post.author.nickname}</p>
-              <CommentForm id={id} />
-              <CommentsList id={id} />
+              <CommentForm id={id} handleCommentUpdate={handleCommentUpdate} />
+              <CommentsList id={id} handleCommentUpdate={handleCommentUpdate} />
               {user && user.id === post.author.id && (
                 <>
                   <button onClick={handleDeleteButton}>삭제</button>
