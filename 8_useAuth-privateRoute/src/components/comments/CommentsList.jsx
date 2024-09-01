@@ -1,6 +1,7 @@
 import { deleteComment, fetchComments, updateComment } from 'api/comments';
 import AuthContext from 'context/AuthContext';
 import { useContext, useEffect, useState } from 'react';
+import CommentReply from './CommentReply';
 
 const CommentsList = ({ id, handleCommentUpdate }) => {
   const [comments, setComments] = useState([]);
@@ -95,7 +96,7 @@ const CommentsList = ({ id, handleCommentUpdate }) => {
                   <button onClick={() => handleEditMode(comment)}>수정</button>
                 </>
               )}
-
+              <CommentReply commentId={comment.id} />
               <hr />
             </>
           )}

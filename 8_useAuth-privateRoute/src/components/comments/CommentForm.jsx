@@ -28,6 +28,7 @@ const CommentForm = ({ id, handleCommentUpdate }) => {
       <h2>댓글을 작성해주세요.</h2>
       <form onSubmit={handleSubmit}>
         <textarea value={content} onChange={(e) => setContent(e.target.value)} placeholder="댓글을 입력하세요." />
+
         <button type="submit">작성하기</button>
       </form>
     </div>
