@@ -16,7 +16,7 @@ const Router = () => {
     { path: '/', element: <PublicHomePage /> }, // 모든 사용자에게 기본 페이지로 제공
     { path: '/post-list', element: <PostListPage /> },
     { path: '/posts/:id', element: <PostDetailPage /> },
-    { path: '/user-profile', element: <UserProfilePage /> }
+    { path: '/user-profile/:id', element: <UserProfilePage /> }
   ];
 
   // 비인증 사용자 전용 라우터 설정

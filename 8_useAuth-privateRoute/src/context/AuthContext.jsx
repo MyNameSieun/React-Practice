@@ -26,10 +26,6 @@ export const AuthProvider = ({ children }) => {
     return <div>Loading...</div>;
   }
 
-  if (!user) {
-    return <p>사용자 정보를 가져오는 데 실패했습니다.</p>;
-  }
-
   return <AuthContext.Provider value={{ user, setUser, isSignIn }}>{children}</AuthContext.Provider>;
 };
 
