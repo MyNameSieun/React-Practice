@@ -1,8 +1,7 @@
-import AuthContext from 'context/AuthContext';
-import { useContext } from 'react';
+import { useAuth } from 'context/AuthContext';
 
 const PublicHomePage = () => {
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth();
 
   return (
     <div>

@@ -1,14 +1,14 @@
 import { deleteComment, fetchComments, updateComment } from 'api/comments';
-import AuthContext from 'context/AuthContext';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import CommentReply from './CommentReply';
+import { useAuth } from 'context/AuthContext';
 
 const CommentsList = ({ id, handleCommentUpdate }) => {
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [editMode, setEditMode] = useState(null);
   const [editContent, setEditContent] = useState('');
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth();
 
   useEffect(() => {
     const loadComments = async () => {

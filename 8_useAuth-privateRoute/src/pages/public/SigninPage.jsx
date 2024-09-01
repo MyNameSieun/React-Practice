@@ -1,6 +1,6 @@
 import { login } from 'api/auth';
-import AuthContext from 'context/AuthContext';
-import { useContext, useState } from 'react';
+import { useAuth } from 'context/AuthContext';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const SigninPage = () => {
@@ -9,7 +9,7 @@ const SigninPage = () => {
   const [error, setError] = useState(null);
 
   const navigate = useNavigate();
-  const { setUser } = useContext(AuthContext);
+  const { setUser } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();

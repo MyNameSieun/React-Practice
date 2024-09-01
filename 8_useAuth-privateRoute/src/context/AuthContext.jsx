@@ -1,5 +1,5 @@
 import { getProfile } from 'api/auth';
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 
 const AuthContext = createContext();
 
@@ -33,4 +33,6 @@ export const AuthProvider = ({ children }) => {
   return <AuthContext.Provider value={{ user, setUser, isSignIn }}>{children}</AuthContext.Provider>;
 };
 
-export default AuthContext;
+// export default AuthContext;
+// const { user, login, logout, isSignIn } = useAuth(); 와 같이 사용 가능
+export const useAuth = () => useContext(AuthContext);

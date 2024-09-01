@@ -1,11 +1,11 @@
 import { getProfile, updateNickname } from 'api/auth';
-import AuthContext from 'context/AuthContext';
-import { useContext, useEffect, useState } from 'react';
+import { useAuth } from 'context/AuthContext';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const MyPage = () => {
-  const { user, setUser } = useContext(AuthContext);
+  const { user, setUser } = useAuth();
   const [userPosts, setUserPosts] = useState([]);
   const [newNickname, setNewNickname] = useState('');
   const [isEditingNickname, setIsEditingNickname] = useState(false);
@@ -100,4 +100,5 @@ const StPostList = styled.ul`
   cursor: pointer;
   list-style-type: none;
   padding: 0;
+  border: 1px solid black;
 `;

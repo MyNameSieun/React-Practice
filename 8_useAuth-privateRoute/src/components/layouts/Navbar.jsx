@@ -1,11 +1,10 @@
 import { logout } from 'api/auth';
-import AuthContext from 'context/AuthContext';
-import { useContext } from 'react';
+import { useAuth } from 'context/AuthContext';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Navbar = () => {
-  const { setUser, isSignIn } = useContext(AuthContext);
+  const { setUser, isSignIn } = useAuth();
 
   const hanldeLogout = async () => {
     try {

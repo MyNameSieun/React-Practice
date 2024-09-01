@@ -1,15 +1,15 @@
 import { deletePost, fetchPostById, updatePost } from 'api/posts';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import DOMPurify from 'dompurify';
 import 'react-quill/dist/quill.snow.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
-import AuthContext from 'context/AuthContext';
 import TextEditor from 'components/TextEditor';
 import CommentsList from 'components/comments/CommentsList';
 import CommentForm from 'components/comments/CommentForm';
+import { useAuth } from 'context/AuthContext';
 
 const PostDetailPage = () => {
   const [post, setPost] = useState(null);
@@ -19,7 +19,7 @@ const PostDetailPage = () => {
   const [content, setContent] = useState('');
   const [refreshComments, setRefreshComments] = useState(false); // 댓글 새로 고침 상태
 
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth();
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -31,8 +31,9 @@ const PostDetailPage = () => {
         setTitle(response.data.title);
         setContent(response.data.content);
       } catch (error) {
-        console.error(error);
-        alert(error.response.data);
+        const message = error.response?.data || '게시글을 가져오는 중 오류가 발생했습니다.';
+        console.error(message);
+        alert(message);
       } finally {
         setLoading(false);
       }
@@ -54,8 +55,9 @@ const PostDetailPage = () => {
         await deletePost(id);
       }
     } catch (error) {
-      alert(error.response.data);
-      console.error(error.response.data);
+      const message = error.response?.data || '게시글 삭제 중 오류가 발생했습니다.';
+      console.error(message);
+      alert(message);
     }
   };
 
@@ -76,7 +78,9 @@ const PostDetailPage = () => {
       setIsEditing(false);
       alert('게시글이 수정되었습니다.');
     } catch (error) {
-      console.error(error);
+      const message = error.response?.data || '게시글 수정 중 오류가 발생했습니다.';
+      console.error(message);
+      alert(message);
     }
   };
 
@@ -104,7 +108,6 @@ const PostDetailPage = () => {
                 <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
               </li>
               <li>
-                내용:
                 <TextEditor theme="snow" value={content} onChange={setContent} />
               </li>
               <button onClick={handleSaveButton}>저장</button>
@@ -113,7 +116,6 @@ const PostDetailPage = () => {
           ) : (
             <>
               <li>제목: {post.title}</li>
-              내용:
               <li
                 dangerouslySetInnerHTML={{
                   __html: DOMPurify.sanitize(post.content)
