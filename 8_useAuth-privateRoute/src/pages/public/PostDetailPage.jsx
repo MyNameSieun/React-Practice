@@ -121,14 +121,14 @@ const PostDetailPage = () => {
               />
               <li>작성일: {post.createdAt}</li>
               <p>작성자: {post.author.nickname}</p>
-              <CommentForm id={id} handleCommentUpdate={handleCommentUpdate} />
-              <CommentsList id={id} handleCommentUpdate={handleCommentUpdate} />
               {user && user.id === post.author.id && (
                 <>
                   <button onClick={handleDeleteButton}>삭제</button>
                   <button onClick={handleEditButton}>수정</button>
                 </>
               )}
+              <CommentForm id={id} handleCommentUpdate={handleCommentUpdate} />
+              <CommentsList id={id} handleCommentUpdate={handleCommentUpdate} />
             </>
           )}
         </ul>
