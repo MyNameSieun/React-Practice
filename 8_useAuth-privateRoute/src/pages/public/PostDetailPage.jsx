@@ -123,7 +123,10 @@ const PostDetailPage = () => {
               />
               <li>작성일: {post.createdAt}</li>
               <p>작성자: {post.author.nickname}</p>
-              <p onClick={() => navigate(`/user-profile/${user.id}`)}>{post.author.nickname}이 쓴 글 보러가기(클릭)</p>
+
+              <p onClick={() => navigate(`/user-profile/${post.author.id}`)}>
+                {post.author.nickname}이 쓴 글 보러가기(클릭)
+              </p>
               {user && user.id === post.author.id && (
                 <>
                   <button onClick={handleDeleteButton}>삭제</button>
