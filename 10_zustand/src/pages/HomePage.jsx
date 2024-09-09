@@ -1,16 +1,10 @@
-import useCounterStore from 'store/counterStore';
+import Todo from 'components/todos/Todo';
+import React from 'react';
 
 const HomePage = () => {
-  const { count, increase, discrease } = useCounterStore();
-
   return (
     <div>
-      {count}
-
-      <div>
-        <button onClick={increase}>증가</button>
-        <button onClick={discrease}>감소</button>
-      </div>
+      <Todo />
     </div>
   );
 };
