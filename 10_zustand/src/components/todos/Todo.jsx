@@ -5,7 +5,7 @@ const Todo = () => {
   return (
     <div>
       <TodoForm />
-      <TodoList />
+      <TodoList showCompleted={false} />
     </div>
   );
 };
