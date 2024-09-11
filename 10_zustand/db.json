@@ -1,34 +1,24 @@
 {
   "todos": [
     {
-      "title": "ㅔ",
-      "content": "",
-      "id": "7fc5",
-      "isDone": false
+      "isDone": true,
+      "id": "7fc5"
     },
     {
-      "id": "a1e6",
-      "title": "ㅇㄹ",
-      "content": "ㅊ튜",
-      "isDone": true
+      "isDone": true,
+      "id": "a1e6"
     },
     {
-      "id": "4ccb",
-      "title": "ㅈㅂㄷ",
-      "content": "ㅂㅈㄷ",
-      "isDone": false
+      "isDone": true,
+      "id": "4ccb"
     },
     {
-      "id": "4203",
-      "title": "56",
-      "content": "546",
-      "isDone": false
+      "isDone": true,
+      "id": "4203"
     },
     {
-      "id": "3e41",
-      "title": "ㄷ",
-      "content": "ㄹㄷ",
-      "isDone": false
+      "isDone": false,
+      "id": "3e41"
     }
   ]
 }

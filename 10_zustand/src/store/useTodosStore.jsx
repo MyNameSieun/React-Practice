@@ -60,7 +60,17 @@ export const useTodosStore = create((set) => ({
     } catch (error) {
       console.error(error);
     }
-  }
+  },
 
   // todos 상태 토글
+  toggleTodo: async (id, isDone) => {
+    try {
+      const response = await todosAxios.put(`/todos/${id}`, { isDone });
+      set((state) => ({
+        todos: state.todos.map((todo) => (todo.id === id ? { ...todo, isDone: response.data.isDone } : todo))
+      }));
+    } catch (error) {
+      console.error(error);
+    }
+  }
 }));

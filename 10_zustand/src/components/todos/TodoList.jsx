@@ -1,44 +1,45 @@
 import { useEffect, useState } from 'react';
 import { useTodosStore } from 'store/useTodosStore';
 
-const TodoList = () => {
-  const { todos, loading, fetchTodos, deleteTodos, editTodos } = useTodosStore();
+const TodoList = ({ showCompleted }) => {
+  const { todos, loading, fetchTodos, deleteTodos, editTodos, toggleTodo } = useTodosStore();
   const [edit, setEdit] = useState(null);
 
-  // todo 조회
   useEffect(() => {
     fetchTodos();
   }, [fetchTodos]);
 
-  // 로딩 처리
   if (loading) {
     return <p>...로딩중</p>;
   }
 
-  // todo 삭제
   const handleDeleteTodo = (todo) => {
-    const deleteComfirm = window.confirm('정말 삭제하시겠습니까?');
-    if (deleteComfirm) {
+    const deleteConfirm = window.confirm('정말 삭제하시겠습니까?');
+    if (deleteConfirm) {
       deleteTodos(todo);
       alert('삭제가 완료되었습니다.');
     }
   };
 
-  // 수정 모드 전환
   const handleEditMode = (todo) => {
     setEdit(todo);
   };
 
-  // 수정 완료
   const handleDoneEdit = (todoId) => {
     editTodos(todoId, { title: edit.title, content: edit.content });
     alert('수정이 완료되었습니다.');
     setEdit(null);
   };
 
+  const handleToggleTodo = (todo) => {
+    toggleTodo(todo.id, !todo.isDone);
+  };
+
+  const filteredTodos = todos.filter((todo) => todo.isDone === showCompleted);
+
   return (
     <ul>
-      {todos.map((todo) => (
+      {filteredTodos.map((todo) => (
         <li key={todo.id}>
           {edit && todo.id === edit.id ? (
             <>
@@ -51,6 +52,8 @@ const TodoList = () => {
             <>
               <p>제목: {todo.title}</p>
               <p>내용: {todo.content}</p>
+              <p>완료 상태: {todo.isDone ? '완료됨' : '미완료'}</p>
+              <button onClick={() => handleToggleTodo(todo)}>{todo.isDone ? '취소' : '완료'}</button>
               <button onClick={() => handleDeleteTodo(todo.id)}>삭제</button>
               <button onClick={() => handleEditMode(todo)}>수정</button>
             </>
