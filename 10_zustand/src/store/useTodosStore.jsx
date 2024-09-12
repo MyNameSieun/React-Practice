@@ -1,3 +1,4 @@
+// src/store/useRodosStore.jsx
 import axios from 'axios';
 import { create } from 'zustand';
 
@@ -27,7 +28,8 @@ export const useTodosStore = create((set) => ({
   // todos 추가
   addTodos: async (data) => {
     try {
-      const response = await todosAxios.post('/todos', data);
+      const newData = { ...data, isDone: false };
+      const response = await todosAxios.post('/todos', newData);
       set((state) => ({
         todos: [...state.todos, response.data] // 새로운 todo 추가
       }));
@@ -63,9 +65,15 @@ export const useTodosStore = create((set) => ({
   },
 
   // todos 상태 토글
-  toggleTodo: async (id, isDone) => {
+  toggleTodo: async (id) => {
     try {
-      const response = await todosAxios.put(`/todos/${id}`, { isDone });
+      // 1. 현재 상태에서 id와 일치하는 todo 찾기
+      const todoToggle = useTodosStore.getState().todos.find((todo) => todo.id === id);
+
+      // 2. 찾은 todo의 isDone 값을 반전시켜서 서버에 PATCH 요청을 보내기
+      const response = await todosAxios.patch(`/todos/${id}`, { isDone: !todoToggle.isDone });
+
+      // 3. 상태 업데이트
       set((state) => ({
         todos: state.todos.map((todo) => (todo.id === id ? { ...todo, isDone: response.data.isDone } : todo))
       }));

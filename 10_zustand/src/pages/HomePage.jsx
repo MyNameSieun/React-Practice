@@ -1,10 +1,9 @@
-import Todo from 'components/todos/Todo';
-import React from 'react';
+import Todos from 'components/todos/Todos';
 
 const HomePage = () => {
   return (
     <div>
-      <Todo />
+      <Todos />
     </div>
   );
 };

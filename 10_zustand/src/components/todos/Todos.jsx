@@ -1,7 +1,8 @@
+// src/components/todos/Todos.jsx
 import TodoForm from './TodoForm';
 import TodoList from './TodoList';
 
-const Todo = () => {
+const Todos = () => {
   return (
     <div>
       <TodoForm />
@@ -13,4 +14,4 @@ const Todo = () => {
   );
 };
 
-export default Todo;
+export default Todos;
