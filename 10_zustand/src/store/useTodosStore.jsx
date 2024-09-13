@@ -1,4 +1,3 @@
-// src/store/useRodosStore.jsx
 import axios from 'axios';
 import { create } from 'zustand';
 
@@ -52,9 +51,9 @@ export const useTodosStore = create((set) => ({
   // todos 수정
   editTodos: async (id, updatedData) => {
     try {
-      const response = await todosAxios.put(`/todos/${id}`, updatedData);
+      const response = await todosAxios.patch(`/todos/${id}`, updatedData);
       set((state) => ({
-        todos: state.todos.patch(
+        todos: state.todos.map(
           (todo) => (todo.id === id ? response.data : todo) // 수정된 todo 반영
         )
       }));
