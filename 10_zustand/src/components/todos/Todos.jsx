@@ -1,17 +1,21 @@
-// src/components/todos/Todos.jsx
+import styled from 'styled-components';
 import TodoForm from './TodoForm';
 import TodoList from './TodoList';
 
 const Todos = () => {
   return (
-    <div>
+    <>
       <TodoForm />
-      <h1>완료됨</h1>
+      <StH1>할 일 미완료</StH1>
       <TodoList showCompleted={true} />
-      <h1>미완료</h1>
+      <StH1>할 일 완료</StH1>
       <TodoList showCompleted={false} />
-    </div>
+    </>
   );
 };
 
 export default Todos;
+
+const StH1 = styled.h1`
+  font-size: 24px;
+`;

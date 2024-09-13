@@ -1,9 +1,8 @@
-// src/components/todos/TodoList.jsx
 import { useEffect, useState } from 'react';
 import { useTodosStore } from 'store/useTodosStore';
 
 const TodoList = ({ showCompleted }) => {
-  const { todos, loading, fetchTodos, deleteTodos, editTodos, toggleTodo } = useTodosStore();
+  const { todos, loading, fetchTodos, deleteTodos, editTodos, toggleTodos } = useTodosStore();
   const [edit, setEdit] = useState(null);
 
   useEffect(() => {
@@ -33,7 +32,7 @@ const TodoList = ({ showCompleted }) => {
   };
 
   const handleToggleTodo = (todo) => {
-    toggleTodo(todo.id, !todo.isDone);
+    toggleTodos(todo.id, !todo.isDone);
   };
 
   const filteredTodos = todos.filter((todo) => todo.isDone === showCompleted);
