@@ -7,6 +7,13 @@ const TodoList = ({ todos, isDone }) => {
   const [editTodo, setEditTodo] = useState(null);
   const queryClient = useQueryClient(); // 캐시 업데이트를 위한 queryClient 사용
 
+  // 삭제 확인 처리
+  const handleDelete = (id) => {
+    const isConfirmed = window.confirm('정말로 삭제하시겠습니까?');
+    if (isConfirmed) {
+      deleteTodoMutation.mutate(id);
+    }
+  };
   // 삭제
   const deleteTodoMutation = useMutation({
     mutationFn: deleteTodos,
@@ -69,7 +76,7 @@ const TodoList = ({ todos, isDone }) => {
             <>
               <p>제목: {todo.title}</p>
               <p>내용: {todo.content}</p>
-              <button onClick={() => deleteTodoMutation.mutate(todo.id)}>삭제</button>
+              <button onClick={() => handleDelete(todo.id)}>삭제</button>
               <button onClick={() => setEditTodo(todo)}>수정</button>
               <button
                 onClick={() =>
