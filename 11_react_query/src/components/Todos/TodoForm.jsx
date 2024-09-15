@@ -1,24 +1,15 @@
-import { addTodos, fetchTodos } from 'api/todos';
+// src/components/Todos/TodoForm.jsx
 import { useState } from 'react';
 
-const TodoForm = ({ setTodos }) => {
+const TodoForm = ({ addTodoMutation }) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-
-    try {
-      const newTodo = { title, content, isDone: false };
-      await addTodos(newTodo);
-      alert('추가 완료!');
-      setTitle('');
-      setContent('');
-      const response = await fetchTodos();
-      setTodos(response.data);
-    } catch (error) {
-      console.error(error);
-    }
+    addTodoMutation.mutate({ title, content, isDone: false });
+    setTitle('');
+    setContent('');
   };
 
   return (

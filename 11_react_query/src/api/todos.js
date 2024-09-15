@@ -1,3 +1,4 @@
+// src/api/todos.js
 import axios from 'axios';
 
 const todosAxios = axios.create({
@@ -6,9 +7,9 @@ const todosAxios = axios.create({
 
 // todos 조회
 export const fetchTodos = async () => {
-  return await todosAxios.get(`/todos`);
+  const response = await todosAxios.get('/todos');
+  return response.data; // 데이터를 반환
 };
-
 // todos 작성
 export const addTodos = async (data) => {
   return await todosAxios.post(`/todos`, data);
@@ -25,6 +26,6 @@ export const editTodos = async (id, data) => {
 };
 
 // todos toggle
-export const toggleTodos = async (id) => {
-  return await todosAxios.patch(`/todos/${id}`);
+export const toggleTodos = async (id, isDone) => {
+  return await todosAxios.patch(`/todos/${id}`, { isDone: !isDone });
 };
