@@ -1,4 +1,3 @@
-// src/components/Todos/Todos.jsx
 import { useQuery } from '@tanstack/react-query';
 import TodoForm from './TodoForm';
 import TodoList from './TodoList';
