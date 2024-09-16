@@ -13,7 +13,7 @@ const TodoList = ({ todos, isDone }) => {
   const deleteMutation = useMutation({
     mutationFn: deleteTodos,
     onSuccess: () => {
-      queryClient.invalidateQueries(['todos']);
+      queryClient.invalidateQueries({ queryKey: ['todos'] });
       alert('삭제 완료!');
     },
     onError: (error) => {
@@ -34,7 +34,7 @@ const TodoList = ({ todos, isDone }) => {
     // mutate 메서드 호출 시 전달
     mutationFn: ({ id, updatedTodo }) => editTodos(id, updatedTodo),
     onSuccess: () => {
-      queryClient.invalidateQueries(['todos']);
+      queryClient.invalidateQueries({ queryKey: ['todos'] });
       setEditTodo(null);
       alert('수정 완료!');
     },
@@ -55,7 +55,7 @@ const TodoList = ({ todos, isDone }) => {
   const toggleMutation = useMutation({
     mutationFn: ({ id, isDone }) => toggleTodos(id, isDone),
     onSuccess: () => {
-      queryClient.invalidateQueries(['todos']);
+      queryClient.invalidateQueries({ queryKey: ['todos'] });
     },
     onError: (error) => {
       console.error('할 일 상태 변경 실패:', error);
