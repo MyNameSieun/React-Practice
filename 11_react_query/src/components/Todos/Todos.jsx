@@ -1,20 +1,10 @@
 // src/components/Todos/Todos.jsx
-import { useQuery } from '@tanstack/react-query';
 import TodoForm from './TodoForm';
 import TodoList from './TodoList';
-
-import { fetchTodos } from 'api/todos';
-import { QUERY_KEYS } from 'components/hooks/query/keys';
+import { useTodosQuery } from 'components/hooks/query/useQuery';
 
 const Todos = () => {
-  const {
-    data: todos = [],
-    isLoading,
-    error
-  } = useQuery({
-    queryKey: [QUERY_KEYS.TODOS], // 쿼리 키 사용
-    queryFn: fetchTodos
-  });
+  const { data: todos = [], isLoading, error } = useTodosQuery();
 
   // 로딩 중 처리
   if (isLoading) {

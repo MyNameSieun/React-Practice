@@ -2,7 +2,7 @@
   "todos": [
     {
       "id": "d4e2",
-      "title": "호",
+      "title": "호6",
       "content": "ㅎ로",
       "isDone": true
     },
@@ -10,7 +10,7 @@
       "id": "c46b",
       "title": "6ㅔㅔㅔ",
       "content": "65",
-      "isDone": false
+      "isDone": true
     }
   ]
 }

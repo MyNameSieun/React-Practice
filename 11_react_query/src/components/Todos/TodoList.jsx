@@ -1,7 +1,7 @@
 // src/components/Todos/TodosList.jsx
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { deleteTodos, editTodos, toggleTodos } from 'api/todos';
-import { QUERY_KEYS } from 'components/hooks/query/keys';
+import { QUERY_KEYS } from 'components/hooks/query/keys.constant';
 import { useState } from 'react';
 
 const TodoList = ({ todos, isDone }) => {
@@ -35,7 +35,7 @@ const TodoList = ({ todos, isDone }) => {
     // mutate 메서드 호출 시 전달
     mutationFn: ({ id, updatedTodo }) => editTodos(id, updatedTodo),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['todos'] });
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.TODOS] });
       setEditTodo(null);
       alert('수정 완료!');
     },

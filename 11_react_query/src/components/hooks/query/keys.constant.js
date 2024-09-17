@@ -1,4 +1,4 @@
-// src/components/hooks/query/keys.js
+// src/components/hooks/query/keys.constant.js
 export const QUERY_KEYS = {
   TODOS: 'todos'
   // 필요한 다른 쿼리 키도 여기 추가

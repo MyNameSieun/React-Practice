@@ -1,7 +1,7 @@
 // src/components/Todos/TodoForm.jsx
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { addTodos } from 'api/todos';
-import { QUERY_KEYS } from 'components/hooks/query/keys';
+import { QUERY_KEYS } from 'components/hooks/query/keys.constant';
 import { useState } from 'react';
 
 const TodoForm = () => {
