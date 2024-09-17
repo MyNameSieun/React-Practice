@@ -1,6 +1,7 @@
 // src/components/Todos/TodoForm.jsx
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { addTodos, fetchTodos } from 'api/todos';
+import { addTodos } from 'api/todos';
+import { QUERY_KEYS } from 'components/hooks/query/keys';
 import { useState } from 'react';
 
 const TodoForm = () => {
@@ -13,7 +14,7 @@ const TodoForm = () => {
   const addTodoMutation = useMutation({
     mutationFn: addTodos,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['todos'] }); // 'todos' 쿼리를 무효화하여 목록을 새로고침
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.TODOS] }); // 'todos' 쿼리를 무효화하여 목록을 새로고침
       setTitle('');
       setContent('');
       alert('추가 완료!');

@@ -4,6 +4,7 @@ import TodoForm from './TodoForm';
 import TodoList from './TodoList';
 
 import { fetchTodos } from 'api/todos';
+import { QUERY_KEYS } from 'components/hooks/query/keys';
 
 const Todos = () => {
   const {
@@ -11,7 +12,7 @@ const Todos = () => {
     isLoading,
     error
   } = useQuery({
-    queryKey: ['todos'],
+    queryKey: [QUERY_KEYS.TODOS], // 쿼리 키 사용
     queryFn: fetchTodos
   });
 

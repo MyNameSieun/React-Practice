@@ -1,6 +1,7 @@
 // src/components/Todos/TodosList.jsx
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { deleteTodos, editTodos, fetchTodos, toggleTodos } from 'api/todos';
+import { deleteTodos, editTodos, toggleTodos } from 'api/todos';
+import { QUERY_KEYS } from 'components/hooks/query/keys';
 import { useState } from 'react';
 
 const TodoList = ({ todos, isDone }) => {
@@ -13,7 +14,7 @@ const TodoList = ({ todos, isDone }) => {
   const deleteMutation = useMutation({
     mutationFn: deleteTodos,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['todos'] });
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.TODOS] });
       alert('삭제 완료!');
     },
     onError: (error) => {
